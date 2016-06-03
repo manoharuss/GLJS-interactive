@@ -6,10 +6,9 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.19.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.19.1/mapbox-gl.css' rel='stylesheet' />
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-    </style>
+          
+        
+
 </head>
 <body>
 
@@ -23,7 +22,23 @@
         font-weight: 700;
     }
 </style>
-<div id='map'></div>
+
+<div id='map' style='width: 400px; height: 300px;'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibWFub2hhcnVzcyIsImEiOiJjaW1mMDZiYnIwMTU2dGlsdm5pMWpoYm5iIn0.X6u7Ke6rPN5ap2Na15HItw';
+  var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v8'
+  });
+</script>
+        
+
+
+
+
+
+
+
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFub2hhcnVzcyIsImEiOiJjaW1mMDZiYnIwMTU2dGlsdm5pMWpoYm5iIn0.X6u7Ke6rPN5ap2Na15HItw';
 var markers = {
@@ -121,13 +136,7 @@ var markers = {
     }]
 };
 
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/manoharuss/cioy9ny8z000wdsm80qjlcusi',
-    center: [80.660, 16.4980],
-    zoom: 11
-    hash: true
-});
+
 
 map.on('load', function () {
     // Add marker data as a new GeoJSON source.
