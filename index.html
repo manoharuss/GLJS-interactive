@@ -46,7 +46,35 @@
     }
 </style>
 
+
+
+<style>
+    #fly {
+        display: block;
+        position: relative;
+        margin: 0px auto;
+        width: 20%;
+        height: 40px;
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        font-size: 10px;
+        text-align: center;
+        color: #fff;
+        background: #ee8a65;
+    }
+</style>
 <div id='map' style='width: 1200px; height: 900px;'></div>
+<br/>
+<button onclick='fly();' id='fly'>Fly</button>
+
+
+
+
+
+
+
+
 <div id='menu'>
     <input id='basic' type='radio' name='rtoggle' value='basic' checked='checked'>
     <label for='basic'>basic</label>
@@ -175,12 +203,12 @@ var markers = {
     }, {
         "type": "Feature",
         "properties": {
-            "description": "<div class=\"marker-title\">KFC</div><p>I could'nt find chicken or burger in maki icons</p>",
-            "marker-symbol": "beer"
+            "description": "<div class=\"marker-title\">Mapbox</div><p>Hey there!</p>",
+            "marker-symbol": "rocket"
         },
         "geometry": {
             "type": "Point",
-            "coordinates": [80.65228, 16.49889]
+            "coordinates": [77.63689, 12.98107]
         }
     }]
 };
@@ -272,13 +300,21 @@ for (var i = 0; i < inputs.length; i++) {
 map.addControl(new mapboxgl.Navigation());
 var tooltip = new mapboxgl.Popup({closeOnClick: false})
     .setLngLat([80.65437, 16.49828])
-    .setHTML('<h2>Try clicking on some icons here :) </h2>')
+    .setHTML('<h2>Close this Pop and try clicking on some icons here :) </h2>')
     .addTo(map);
 
 
 
 
-
+function fly() {
+  // Fly to a random location by offsetting the point -74.50, 40
+  // by up to 5 degrees.
+  map.flyTo({
+    center: [
+      77.63682,
+      12.98108]
+    });
+  }
 
 
 
