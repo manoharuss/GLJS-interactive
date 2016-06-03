@@ -6,11 +6,32 @@
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.19.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.19.1/mapbox-gl.css' rel='stylesheet' />
-          
-        
+
+
 
 </head>
 <body>
+<!--  This below 2 lines are for directions API-->
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v2.0.0/mapbox-gl-directions.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v2.0.0/mapbox-gl-directions.css' type='text/css' />
+
+<!--  Lets throw in a geocoder while we are at it!!! Ehahahahahaha-->
+  <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.1.0/mapbox-gl-geocoder.js'></script>
+  <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.1.0/mapbox-gl-geocoder.css' type='text/css' />
+
+
+
+
+<style>
+      #menu {
+          position: absolute;
+          background: #fff;
+          padding: 10px;
+          font-family: 'Open Sans', sans-serif;
+      }
+</style>
+
+
 
 <style>
     .mapboxgl-popup {
@@ -20,21 +41,49 @@
     .marker-title {
         font-weight: 700;
     }
+
+    .directions-control.directions-control-inputs{top:80px;
+    }
 </style>
 
-<div id='map' style='width: 800px; height: 600px;'></div>
+<div id='map' style='width: 1200px; height: 900px;'></div>
+<div id='menu'>
+    <input id='basic' type='radio' name='rtoggle' value='basic' checked='checked'>
+    <label for='basic'>basic</label>
+    <input id='streets' type='radio' name='rtoggle' value='streets'>
+    <label for='streets'>streets</label>
+    <input id='emerald' type='radio' name='rtoggle' value='emerald'>
+    <label for='emerald'>emerald</label>
+    <input id='bright' type='radio' name='rtoggle' value='bright'>
+    <label for='bright'>bright</label>
+    <input id='light' type='radio' name='rtoggle' value='light'>
+    <label for='light'>light</label>
+    <input id='dark' type='radio' name='rtoggle' value='dark'>
+    <label for='dark'>dark</label>
+    <input id='satellite' type='radio' name='rtoggle' value='satellite'>
+    <label for='satellite'>satellite</label>
+</div>
+
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFub2hhcnVzcyIsImEiOiJjaW1mMDZiYnIwMTU2dGlsdm5pMWpoYm5iIn0.X6u7Ke6rPN5ap2Na15HItw';
   var map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v9'
-      //hash: true
+      style: 'mapbox://styles/manoharuss/cioy98s910011dsj55pkeua0s',
+      // center: [80.65986, 16.50168],
+      // zoom: 11,
+      hash: true
+
   });
+
+
+  map.addControl(new mapboxgl.Geocoder());
+  map.addControl(new mapboxgl.Directions());
+
+
+
+
+
 </script>
-        
-
-
-
 
 
 
@@ -56,7 +105,7 @@ var markers = {
     }, {
         "type": "Feature",
         "properties": {
-            "description": "<div class=\"marker-title\">Andhra Loyola College</div><p>It is gigantic. <a href=\"www.andhraloyolacollege.ac.in\" target=\"_blank\" title=\"Opens in a new window\">Andhra Loyola College</a> occupies a great deal of history with Vijayawada. A person can study from their kindergarten till post-doctoral, get a job here and retire here. Huge institution. Co-ed as well. My dad studied here. :p</p>",
+            "description": "<div class=\"marker-title\">Andhra Loyola College</div><p>It is gigantic. <a href=\"www.andhraloyolacollege.ac.in\" target=\"_blank\" title=\"Opens in a new window\">Andhra Loyola College</a> occupies a great deal of history with Vijayawada. A person can study from their kindergarten till post-doctoral, get a job here and retire here. Huge institution. Co-ed as well:p</p>",
             "marker-symbol": "college"
         },
         "geometry": {
@@ -67,7 +116,7 @@ var markers = {
         "type": "Feature",
         "properties": {
             "description": "<div class=\"marker-title\">Cathedral Church</div><p> Officially called as St. Paul's. Usually goes as the cathedral church. Good architecture</p>",
-            "marker-symbol": "church"
+            "marker-symbol": "religious-christian"
         },
         "geometry": {
             "type": "Point",
@@ -77,81 +126,109 @@ var markers = {
         "type": "Feature",
         "properties": {
             "description": "<div class=\"marker-title\">Ballston Arts & Crafts Market</div><p>The <a href=\"http://ballstonarts-craftsmarket.blogspot.com/\" target=\"_blank\" title=\"Opens in a new window\">Ballston Arts & Crafts Market</a> sets up shop next to the Ballston metro this Saturday for the first of five dates this summer. Nearly 35 artists and crafters will be on hand selling their wares. 10:00-4:00 p.m.</p>",
-            "marker-symbol": "art-gallery"
+            "marker-symbol": "ice-cream"
         },
         "geometry": {
             "type": "Point",
-            "coordinates": [-77.111561, 38.882342]
+            "coordinates": [80.66653, 16.51054]
         }
     }, {
         "type": "Feature",
         "properties": {
-            "description": "<div class=\"marker-title\">Seersucker Bike Ride and Social</div><p>Feeling dandy? Get fancy, grab your bike, and take part in this year's <a href=\"http://dandiesandquaintrelles.com/2012/04/the-seersucker-social-is-set-for-june-9th-save-the-date-and-start-planning-your-look/\" target=\"_blank\" title=\"Opens in a new window\">Seersucker Social</a> bike ride from Dandies and Quaintrelles. After the ride enjoy a lawn party at Hillwood with jazz, cocktails, paper hat-making, and more. 11:00-7:00 p.m.</p>",
-            "marker-symbol": "bicycle"
+            "description": "<div class=\"marker-title\">Bawarchi</div><p>Costs a fortune, but good biryani!</p>",
+            "marker-symbol": "restaurant"
         },
         "geometry": {
             "type": "Point",
-            "coordinates": [-77.052477, 38.943951]
+            "coordinates": [80.65645, 16.50083]
         }
     }, {
         "type": "Feature",
         "properties": {
-            "description": "<div class=\"marker-title\">Capital Pride Parade</div><p>The annual <a href=\"http://www.capitalpride.org/parade\" target=\"_blank\" title=\"Opens in a new window\">Capital Pride Parade</a> makes its way through Dupont this Saturday. 4:30 p.m. Free.</p>",
-            "marker-symbol": "star"
+            "description": "<div class=\"marker-title\">Home Sweet Home</div><p>:)</p>",
+            "marker-symbol": "dog-park"
         },
         "geometry": {
             "type": "Point",
-            "coordinates": [-77.043444, 38.909664]
+            "coordinates": [80.67559, 16.51758]
         }
     }, {
         "type": "Feature",
         "properties": {
-            "description": "<div class=\"marker-title\">Muhsinah</div><p>Jazz-influenced hip hop artist <a href=\"http://www.muhsinah.com\" target=\"_blank\" title=\"Opens in a new window\">Muhsinah</a> plays the <a href=\"http://www.blackcatdc.com\">Black Cat</a> (1811 14th Street NW) tonight with <a href=\"http://www.exitclov.com\" target=\"_blank\" title=\"Opens in a new window\">Exit Clov</a> and <a href=\"http://godsilla.bandcamp.com\" target=\"_blank\" title=\"Opens in a new window\">Gods’illa</a>. 9:00 p.m. $12.</p>",
-            "marker-symbol": "music"
+            "description": "<div class=\"marker-title\">Benz Circle</div><p>Where all the main roads in Vijayawada meet</p>",
+            "marker-symbol": "circle-stroked"
         },
         "geometry": {
             "type": "Point",
-            "coordinates": [-77.031706, 38.914581]
+            "coordinates": [80.65398, 16.49786]
         }
     }, {
         "type": "Feature",
         "properties": {
-            "description": "<div class=\"marker-title\">A Little Night Music</div><p>The Arlington Players' production of Stephen Sondheim's  <a href=\"http://www.thearlingtonplayers.org/drupal-6.20/node/4661/show\" target=\"_blank\" title=\"Opens in a new window\"><em>A Little Night Music</em></a> comes to the Kogod Cradle at The Mead Center for American Theater (1101 6th Street SW) this weekend and next. 8:00 p.m.</p>",
-            "marker-symbol": "music"
+            "description": "<div class=\"marker-title\">Inox</div><p>¯\_(ツ)_/¯</p>",
+            "marker-symbol": "cinema"
         },
         "geometry": {
             "type": "Point",
-            "coordinates": [-77.020945, 38.878241]
+            "coordinates": [80.65997, 16.50270]
         }
     }, {
         "type": "Feature",
         "properties": {
-            "description": "<div class=\"marker-title\">Truckeroo</div><p><a href=\"http://www.truckeroodc.com/www/\" target=\"_blank\">Truckeroo</a> brings dozens of food trucks, live music, and games to half and M Street SE (across from Navy Yard Metro Station) today from 11:00 a.m. to 11:00 p.m.</p>",
-            "marker-symbol": "music"
+            "description": "<div class=\"marker-title\">KFC</div><p>Could'nt find chicken or burger in maki icons</p>",
+            "marker-symbol": "beer"
         },
         "geometry": {
             "type": "Point",
-            "coordinates": [-77.007481, 38.876516]
+            "coordinates": [80.65228, 16.49889]
         }
     }]
 };
+
+function addMarkers(){
+  // Add marker data as a new GeoJSON source.
+  map.addSource("markers", {
+      "type": "geojson",
+      "data": markers
+  });
+  // Add a layer showing the markers.
+  map.addLayer({
+      "id": "markers",
+      "type": "symbol",
+      "source": "markers",
+      "layout": {
+          "icon-image": "{marker-symbol}-15",
+          "icon-allow-overlap": true
+      }
+  });
+}
+
+
+
 map.on('load', function () {
-    // Add marker data as a new GeoJSON source.
-    map.addSource("markers", {
-        "type": "geojson",
-        "data": markers
-    });
-    // Add a layer showing the markers.
-    map.addLayer({
-        "id": "markers",
-        "type": "symbol",
-        "source": "markers",
-        "layout": {
-            "icon-image": "{marker-symbol}-15",
-            "icon-allow-overlap": true
-        }
-    });
+  // addMarkers();
 });
+
+map.on('style.load',function(){
+  console.log('Hello');
+
+
+  addMarkers();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // When a click event occurs near a marker icon, open a popup at the location of
 // the feature, with description HTML from its properties.
 map.on('click', function (e) {
@@ -173,7 +250,49 @@ map.on('mousemove', function (e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 });
+
+
+
+
+var layerList = document.getElementById('menu');
+var inputs = layerList.getElementsByTagName('input');
+
+
+function switchLayer(layer) {
+  var layerId = layer.target.id;
+  map.setStyle('mapbox://styles/mapbox/' + layerId + '-v8');
+}
+for (var i = 0; i < inputs.length; i++) {
+  inputs[i].onclick = switchLayer;
+}
+
+
+
+// Add a popping out message
+map.addControl(new mapboxgl.Navigation());
+var tooltip = new mapboxgl.Popup({closeOnClick: false})
+    .setLngLat([80.65437, 16.49828])
+    .setHTML('<h2>Try clicking on some icons here :) </h2>')
+    .addTo(map);
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
+
+
+
+
+
 
 </body>
 </html>
