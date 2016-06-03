@@ -238,7 +238,7 @@ map.on('load', function () {
 });
 
 map.on('style.load',function(){
-  console.log('Hello');
+  console.log('Hello');//for checking purposes
 
 
   addMarkers();
@@ -254,29 +254,35 @@ map.on('style.load',function(){
 
 
 
+// Create a popup, but don't add it to the map yet.
+var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+});
 
 
 
-// When a click event occurs near a marker icon, open a popup at the location of
-// the feature, with description HTML from its properties.
-map.on('click', function (e) {
+
+// Use the same approach as above to indicate that the symbols are hoverable
+// by changing the cursor style to 'pointer'.
+map.on('mousemove', function(e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
+    // Change the cursor style as a UI indicator.
+    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
     if (!features.length) {
+        popup.remove();
         return;
     }
+
     var feature = features[0];
+
     // Populate the popup and set its coordinates
     // based on the feature found.
-    var popup = new mapboxgl.Popup()
-        .setLngLat(feature.geometry.coordinates)
+    popup.setLngLat(feature.geometry.coordinates)
         .setHTML(feature.properties.description)
         .addTo(map);
-});
-// Use the same approach as above to indicate that the symbols are clickable
-// by changing the cursor style to 'pointer'.
-map.on('mousemove', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['markers'] });
-    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+
 });
 
 
@@ -300,7 +306,7 @@ for (var i = 0; i < inputs.length; i++) {
 map.addControl(new mapboxgl.Navigation());
 var tooltip = new mapboxgl.Popup({closeOnClick: false})
     .setLngLat([80.65437, 16.49828])
-    .setHTML('<h2>Close this Pop and try clicking on some icons here :) </h2>')
+    .setHTML('<h2>Close this Pop and try hovering on the icons here :) </h2>')
     .addTo(map);
 
 
